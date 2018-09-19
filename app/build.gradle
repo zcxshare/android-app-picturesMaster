@@ -1,0 +1,28 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion androids.sdkVersion
+    defaultConfig {
+        applicationId "com.scanmaster.www.scanmaster"
+        minSdkVersion androids.minSdkVersion
+        targetSdkVersion androids.sdkVersion
+        versionCode androids.versionCode
+        versionName androids.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation deps.appcompat_v7
+    implementation deps.constraint_layout
+    testImplementation deps.junit
+    androidTestImplementation deps.runner
+    androidTestImplementation deps.espresso
+}
