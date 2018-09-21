@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion androids.sdkVersion
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
-        minSdkVersion androids.minSdkVersion
-        targetSdkVersion androids.sdkVersion
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.sdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -22,10 +22,13 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation deps.appcompat_v7
-    testImplementation deps.junit
-    androidTestImplementation deps.runner
-    androidTestImplementation deps.espresso
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api rootProject.ext.deps.appcompat_v7
+    api rootProject.ext.deps.constraint_layout
+    testApi rootProject.ext.deps.junit
+    androidTestApi rootProject.ext.deps.runner
+    androidTestApi rootProject.ext.deps.espresso_core
+    api rootProject.ext.deps.swipebacklayout
+    api rootProject.ext.deps.butterknife_compiler
+    api rootProject.ext.deps.butterknife
 }

@@ -1,4 +1,4 @@
-package com.scanmaster.www.commonlibrary;
+package com.scanmaster.commonlibrary;
 
 import org.junit.Test;
 

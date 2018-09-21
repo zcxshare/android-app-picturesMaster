@@ -1,14 +1,18 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion androids.sdkVersion
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
         applicationId "com.scanmaster.www.scanmaster"
-        minSdkVersion androids.minSdkVersion
-        targetSdkVersion androids.sdkVersion
-        versionCode androids.versionCode
-        versionName androids.versionName
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        release {
+        }
     }
     buildTypes {
         release {
@@ -20,9 +24,5 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation deps.appcompat_v7
-    implementation deps.constraint_layout
-    testImplementation deps.junit
-    androidTestImplementation deps.runner
-    androidTestImplementation deps.espresso
+    implementation project(':commonlibrary')
 }

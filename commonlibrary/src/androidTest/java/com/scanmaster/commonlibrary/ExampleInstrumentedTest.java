@@ -1,4 +1,4 @@
-package com.scanmaster.www.commonlibrary;
+package com.scanmaster.commonlibrary;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.scanmaster.www.commonlibrary.test", appContext.getPackageName());
+        assertEquals("com.scanmaster.commonlibrary.test", appContext.getPackageName());
     }
 }
