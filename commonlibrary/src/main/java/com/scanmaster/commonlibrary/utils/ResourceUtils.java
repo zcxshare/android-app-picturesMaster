@@ -9,7 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 
-import com.fuyekeji.www.FYTApplication;
+import com.scanmaster.commonlibrary.InitApplication;
+
 
 /**
  * resource工具
@@ -28,7 +29,7 @@ public class ResourceUtils {
         return context.getString(id);
     }
     public static String getString(@StringRes int id) {
-        return FYTApplication.context.getString(id);
+        return InitApplication.getContext().getString(id);
     }
     public static String getString(@NonNull Context context,@StringRes int id,Object... formatArgs) {
         return context.getString(id,formatArgs);

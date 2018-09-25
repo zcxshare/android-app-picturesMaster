@@ -25,4 +25,5 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':commonlibrary')
+    annotationProcessor rootProject.ext.deps.butterknife_compiler
 }

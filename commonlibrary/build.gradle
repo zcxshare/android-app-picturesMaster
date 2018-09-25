@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
@@ -29,6 +28,6 @@ dependencies {
     androidTestApi rootProject.ext.deps.runner
     androidTestApi rootProject.ext.deps.espresso_core
     api rootProject.ext.deps.swipebacklayout
-    api rootProject.ext.deps.butterknife_compiler
+    annotationProcessor rootProject.ext.deps.butterknife_compiler
     api rootProject.ext.deps.butterknife
 }
