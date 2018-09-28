@@ -4,26 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.scanmaster.www.scanmaster.view.activity.MainActivity">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_center"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/ll_bottom"
+        android:layout_weight="1"
+        app:layout_constraintVertical_weight="1"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="1" />
+        app:layout_constraintBottom_toTopOf="@+id/v_line"/>
 
-    <LinearLayout
-        android:id="@+id/ll_bottom"
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0_5"
+        android:background="@color/line"
+        app:layout_constraintTop_toBottomOf="@+id/vp_center"
+        app:layout_constraintBottom_toTopOf="@+id/rg_bottom"/>
+
+    <RadioGroup
+        android:id="@+id/rg_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent" >
-        <com.scanmaster.commonlibrary.widget.DotImageView
-            android:id="@+id/dotImageView"
-            android:layout_width="wrap_content"
-            android:src="@drawable/home_scan_normal"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.scanmaster.commonlibrary.widget.DotRadioButton
+            android:id="@+id/drb_scan"
+            style="@style/radioBt_home_bottom"
+            android:checked="true"
+            android:drawableTop="@drawable/selector_home_bottom_main"
+            android:text="@string/scan" />
+
+        <com.scanmaster.commonlibrary.widget.DotRadioButton
+            android:id="@+id/drb_crop"
+            style="@style/radioBt_home_bottom"
+            android:drawableTop="@drawable/selector_home_bottom_find"
+            android:text="@string/crop" />
+
+        <com.scanmaster.commonlibrary.widget.DotRadioButton
+            android:id="@+id/drb_discern"
+            style="@style/radioBt_home_bottom"
+            android:drawableTop="@drawable/selector_home_bottom_kind"
+            android:text="@string/discern" />
+
+        <com.scanmaster.commonlibrary.widget.DotRadioButton
+            android:id="@+id/drb_mine"
+            style="@style/radioBt_home_bottom"
+            android:drawableTop="@drawable/selector_home_bottom_mine"
+            android:text="@string/mine" />
+    </RadioGroup>
 </android.support.constraint.ConstraintLayout>

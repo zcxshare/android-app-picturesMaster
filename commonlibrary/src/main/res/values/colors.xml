@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="red">#ffff0000</color>
+    <color name="colorGray_e">#eeeeee</color>
+    <color name="black_overlay">#55000000</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#242828</color>
 </resources>

@@ -23,6 +23,7 @@ android {
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api rootProject.ext.deps.appcompat_v7
+    api rootProject.ext.deps.design
     api rootProject.ext.deps.constraint_layout
     testApi rootProject.ext.deps.junit
     androidTestApi rootProject.ext.deps.runner
@@ -30,4 +31,8 @@ dependencies {
     api rootProject.ext.deps.swipebacklayout
     annotationProcessor rootProject.ext.deps.butterknife_compiler
     api rootProject.ext.deps.butterknife
+    api rootProject.ext.deps.smartRefreshLayout
+    api rootProject.ext.deps.banner
+    api rootProject.ext.deps.baseRecyclerViewAdapterHelper
+    api rootProject.ext.deps.glide
 }

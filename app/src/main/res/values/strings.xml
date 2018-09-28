@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">scanMaster</string>
+    <string name="scan">扫描</string>
+    <string name="crop">裁剪</string>
+    <string name="discern">识别</string>
+    <string name="mine">我的</string>
 </resources>

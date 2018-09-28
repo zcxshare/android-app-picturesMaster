@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
@@ -25,7 +26,11 @@ public class DotImageView extends AppCompatImageView {
     private String mText = "22";
     private int mTextColor = Color.RED;
     private int mTextSize = 30;
+    private int mTextPending = 10;
+    private int mDotRadius = 10;
+
     private Paint mTextPaint;
+    private Rect mTextRect;
 
     public DotImageView(Context context) {
         this(context, null);
@@ -47,6 +52,7 @@ public class DotImageView extends AppCompatImageView {
         mTextPaint.setTextSize(mTextSize);
         mTextPaint.setStyle(Paint.Style.FILL);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
+        mTextRect = new Rect();
     }
 
     @Override
@@ -74,6 +80,15 @@ public class DotImageView extends AppCompatImageView {
         } else {
             w = drawable.getIntrinsicWidth();
             h = drawable.getIntrinsicHeight();
+            mTextPaint.getTextBounds(mText, 0, mText.length(), mTextRect);
+            int textHeight = mTextRect.height();
+            int textWidth = mTextRect.width();
+            if (textHeight > 0 && textWidth > 0) {
+                mDotRadius = textHeight / 2 + mTextPending;
+                w += mDotRadius;
+                h += textHeight + mDotRadius;
+            }
+
             if (w <= 0) w = 1;
             if (h <= 0) h = 1;
 
@@ -87,10 +102,10 @@ public class DotImageView extends AppCompatImageView {
             }
         }
 
-        final int pleft = mPaddingLeft;
-        final int pright = mPaddingRight;
-        final int ptop = mPaddingTop;
-        final int pbottom = mPaddingBottom;
+        final int pleft = getPaddingLeft();
+        final int pright = getPaddingRight();
+        final int ptop = getPaddingTop();
+        final int pbottom = getPaddingBottom();
 
         int widthSize;
         int heightSize;
@@ -109,7 +124,7 @@ public class DotImageView extends AppCompatImageView {
 
             if (desiredAspect != 0.0f) {
                 // See what our actual aspect ratio is
-                final float actualAspect = (float)(widthSize - pleft - pright) /
+                final float actualAspect = (float) (widthSize - pleft - pright) /
                         (heightSize - ptop - pbottom);
 
                 if (Math.abs(actualAspect - desiredAspect) > 0.0000001) {
@@ -118,7 +133,7 @@ public class DotImageView extends AppCompatImageView {
 
                     // Try adjusting width to be proportional to height
                     if (resizeWidth) {
-                        int newWidth = (int)(desiredAspect * (heightSize - ptop - pbottom)) +
+                        int newWidth = (int) (desiredAspect * (heightSize - ptop - pbottom)) +
                                 pleft + pright;
 
 
@@ -130,7 +145,7 @@ public class DotImageView extends AppCompatImageView {
 
                     // Try adjusting height to be proportional to width
                     if (!done && resizeHeight) {
-                        int newHeight = (int)((widthSize - pleft - pright) / desiredAspect) +
+                        int newHeight = (int) ((widthSize - pleft - pright) / desiredAspect) +
                                 ptop + pbottom;
 
                         if (newHeight <= heightSize) {
@@ -150,11 +165,11 @@ public class DotImageView extends AppCompatImageView {
             w = Math.max(w, getSuggestedMinimumWidth());
             h = Math.max(h, getSuggestedMinimumHeight());
 
-            widthSize = resolveSize(w, widthMeasureSpec, 0);
+            widthSize = resolveSizeAndState(w, widthMeasureSpec, 0);
             heightSize = resolveSizeAndState(h, heightMeasureSpec, 0);
         }
 
-        setMeasuredDimension(widthSize, heightSize);
+//        setMeasuredDimension(widthSize, heightSize);
         updateDot(getDrawable(), mDotDrawable);
     }
 
@@ -162,7 +177,7 @@ public class DotImageView extends AppCompatImageView {
                                     int measureSpec) {
         int result = desiredSize;
         final int specMode = MeasureSpec.getMode(measureSpec);
-        final int specSize =  MeasureSpec.getSize(measureSpec);
+        final int specSize = MeasureSpec.getSize(measureSpec);
         switch (specMode) {
             case MeasureSpec.UNSPECIFIED:
                 /* Parent says we can be as big as we want. Just don't be larger
@@ -189,8 +204,13 @@ public class DotImageView extends AppCompatImageView {
         super.onDraw(canvas);
         if (TextUtils.isEmpty(mText)) return;
         canvas.save();
-        canvas.translate(mDotLeft, mDotTop);
+        if (getImageMatrix() == null && getPaddingTop() == 0 && getPaddingLeft() == 0) {
+            canvas.translate(mDotLeft, mDotTop);
+        } else {
+
+        }
 //        mDotDrawable.draw(canvas);
+//        canvas.drawCircle();
         canvas.drawText(mText, 10, 20, mTextPaint);
         canvas.restore();
 
@@ -200,6 +220,7 @@ public class DotImageView extends AppCompatImageView {
      * @param d           绘制的图片
      * @param dotDrawable 小红点背景
      */
+
     private void updateDot(Drawable d, Drawable dotDrawable) {
         int dHeight = d.getIntrinsicHeight();
         int dWidth = d.getIntrinsicWidth();
