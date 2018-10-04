@@ -45,10 +45,10 @@ ext {
             //网络
             //retrofit2包含okhttp
             //"okhttp3"                       : 'com.squareup.okhttp3:okhttp:3.9.0',
-            "retrofit2"                      : 'com.squareup.retrofit2:retrofit:2.3.0',
-            "converter-gson"                 : 'com.squareup.retrofit2:converter-gson:2.3.0',
-            "adapter-rxjava2"                : 'com.squareup.retrofit2:adapter-rxjava2:2.3.0',
-            "rxjava2:rxandroid"              : 'io.reactivex.rxjava2:rxandroid:2.0.1',
+            "retrofit2"                      : 'com.squareup.retrofit2:retrofit:2.4.0',
+            "converter_gson"                 : 'com.squareup.retrofit2:converter-gson:2.4.0',
+            "adapter_rxjava2"                : 'com.squareup.retrofit2:adapter-rxjava2:2.4.0',
+            "rxandroid"              : 'io.reactivex.rxjava2:rxandroid:2.0.1',
             "rxjava2"                        : 'io.reactivex.rxjava2:rxjava:2.1.5',
             //日志拦截器
             "logging-interceptor"            : 'com.squareup.okhttp3:logging-interceptor:3.4.1',

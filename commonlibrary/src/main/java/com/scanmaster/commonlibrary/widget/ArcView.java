@@ -71,7 +71,7 @@ public class ArcView extends View {
         double startDiffer = Math.acos((width / 2) / ovalRadius) * 180 / Math.PI;
         mStartAngle = (float) (startDiffer);
         mSweepAngle = (float) (180 - startDiffer * 2);
-        mPath.addCircle(width / 2, (float) (-ovalRadius + height), (float) ovalRadius, Path.Direction.CW);
+//        mPath.addCircle(width / 2, (float) (-ovalRadius + height), (float) ovalRadius, Path.Direction.CW);
     }
 
     @Override

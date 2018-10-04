@@ -35,4 +35,8 @@ dependencies {
     api rootProject.ext.deps.banner
     api rootProject.ext.deps.baseRecyclerViewAdapterHelper
     api rootProject.ext.deps.glide
+    api rootProject.ext.deps.retrofit2
+    api rootProject.ext.deps.converter_gson
+    api rootProject.ext.deps.adapter_rxjava2
+    api rootProject.ext.deps.rxandroid
 }

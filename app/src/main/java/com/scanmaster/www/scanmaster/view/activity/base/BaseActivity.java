@@ -1,4 +1,4 @@
-package com.scanmaster.www.scanmaster.view.activity;
+package com.scanmaster.www.scanmaster.view.activity.base;
 import com.scanmaster.commonlibrary.activity.MvpActivity;
 import com.scanmaster.commonlibrary.presenter.IPresenter;
 

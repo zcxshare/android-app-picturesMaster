@@ -1,23 +1,19 @@
 package com.scanmaster.www.scanmaster.view.activity;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.RadioGroup;
 
 import com.scanmaster.commonlibrary.presenter.IPresenter;
-import com.scanmaster.commonlibrary.widget.DotRadioButton;
 import com.scanmaster.www.scanmaster.R;
-import com.scanmaster.www.scanmaster.view.fragment.HomeFragment;
+import com.scanmaster.www.scanmaster.view.activity.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -26,18 +22,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     ViewPager mVpCenter;
     @BindView(R.id.rg_bottom)
     RadioGroup mRgBottom;
-    @BindView(R.id.drb_scan)
-    DotRadioButton mDrbScan;
-    @BindView(R.id.drb_crop)
-    DotRadioButton mDrbCrop;
-    @BindView(R.id.drb_discern)
-    DotRadioButton mDrbDiscern;
-    @BindView(R.id.drb_mine)
-    DotRadioButton mDrbMine;
+//    @BindView(R.id.drb_scan)
+//    DotRadioButton mDrbScan;
+//    @BindView(R.id.drb_crop)
+//    DotRadioButton mDrbCrop;
+//    @BindView(R.id.drb_discern)
+//    DotRadioButton mDrbDiscern;
+//    @BindView(R.id.drb_mine)
+//    DotRadioButton mDrbMine;
 
     @Override
     protected void initData() {
-        mFragments.add(new HomeFragment());
+//        mFragments.add(new HomeFragment());
 
     }
 
@@ -74,32 +70,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         });
 
-        mDrbScan.setOnClickListener(this);
-        mDrbCrop.setOnClickListener(this);
-        mDrbDiscern.setOnClickListener(this);
-        mDrbMine.setOnClickListener(this);
+//        mDrbScan.setOnClickListener(this);
+//        mDrbCrop.setOnClickListener(this);
+//        mDrbDiscern.setOnClickListener(this);
+//        mDrbMine.setOnClickListener(this);
 
     }
 
     @Override
     protected void initEvent() {
-        mDrbScan.setNumberDot(true, "123");
-        mDrbCrop.setNumberDot(true, "123");
-        mDrbDiscern.setShowSmallDot(true);
-        mDrbMine.setNumberDot(true, "3");
+//        mDrbScan.setNumberDot(true, "123");
+//        mDrbCrop.setNumberDot(true, "123");
+//        mDrbDiscern.setShowSmallDot(true);
+//        mDrbMine.setNumberDot(true, "3");
 
         mRgBottom.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.drb_scan:
-                        break;
-                    case R.id.drb_crop:
-                        break;
-                    case R.id.drb_discern:
-                        break;
-                    case R.id.drb_mine:
-                        break;
+//                    case R.id.drb_scan:
+//                        break;
+//                    case R.id.drb_crop:
+//                        break;
+//                    case R.id.drb_discern:
+//                        break;
+//                    case R.id.drb_mine:
+//                        break;
                 }
             }
         });

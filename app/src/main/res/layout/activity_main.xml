@@ -32,7 +32,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <com.scanmaster.commonlibrary.widget.DotRadioButton
+       <!-- <com.scanmaster.commonlibrary.widget.DotRadioButton
             android:id="@+id/drb_scan"
             style="@style/radioBt_home_bottom"
             android:checked="true"
@@ -55,6 +55,6 @@
             android:id="@+id/drb_mine"
             style="@style/radioBt_home_bottom"
             android:drawableTop="@drawable/selector_home_bottom_mine"
-            android:text="@string/mine" />
+            android:text="@string/mine" />-->
     </RadioGroup>
 </android.support.constraint.ConstraintLayout>
