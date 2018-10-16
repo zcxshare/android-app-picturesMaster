@@ -15,6 +15,10 @@ public abstract class MvpActivity<P extends IPresenter> extends PanelActivity {
 
     private P mPresenter;
 
+    public P getPresenter() {
+        return mPresenter;
+    }
+
     @Override
     protected void initSome(Bundle savedInstanceState) {
         mPresenter = initPresenter();

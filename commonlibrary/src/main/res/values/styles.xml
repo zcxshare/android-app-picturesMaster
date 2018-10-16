@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="dialog_theme" parent="Base.Theme.AppCompat.Light.Dialog">
+        <item name="windowNoTitle">true</item>
+        <item name="colorButtonNormal">@color/red</item>
+        <item name="editTextColor">@color/black</item>
+    </style>
+</resources>

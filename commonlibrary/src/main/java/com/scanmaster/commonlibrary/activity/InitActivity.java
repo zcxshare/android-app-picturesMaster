@@ -2,6 +2,8 @@ package com.scanmaster.commonlibrary.activity;
 
 import android.os.Bundle;
 
+import com.scanmaster.commonlibrary.InitApplication;
+
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 
 /**
@@ -13,6 +15,7 @@ public abstract class InitActivity extends me.imid.swipebacklayout.lib.app.Swipe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        InitApplication.addActivity(this);
         super.onCreate(savedInstanceState);
         SwipeBackLayout swipeBackLayout = getSwipeBackLayout();
         swipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
@@ -37,5 +40,9 @@ public abstract class InitActivity extends me.imid.swipebacklayout.lib.app.Swipe
 
     protected abstract void initEvent();
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        InitApplication.removeActivity(this);
+    }
 }

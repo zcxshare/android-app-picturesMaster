@@ -2,8 +2,10 @@ package com.scanmaster.commonlibrary.net;
 
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -12,8 +14,10 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -25,24 +29,26 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * explain:　联网管理类
  */
 
-public class RetrofitManager {
+public class RetrofitManager<NetApi> {
     private static final long REPETITION_TIME = 500;
-    private static final int sReadTimeout = 5000;
-    private static final int sWriteTimeout = 5000;
-    private static final int sConnectTimeout = 5000;
+    private static final int sReadTimeout = 2;
+    private static final int sWriteTimeout = 2;
+    private static final int sConnectTimeout = 2;
+    private static Class sNetApi;
 
     private final Retrofit retrofit;
     private static HttpUrl lastUrl;//最后一次的url
     private static long lastTime;
-    private static final String mBaseUrl = "192.168.24.41:8081/";
+    private static final String mBaseUrl = "http://192.168.24.41:8081/";
 
     public NetApi getApiService() {
-        return apiservice;
+        return apiService;
     }
 
-    private final NetApi apiservice;
+    private final NetApi apiService;
 
-    public static RetrofitManager getInstance() {
+    public static RetrofitManager getInstance(Class netApi) {
+        sNetApi = netApi;
         return Instance.instance;
     }
 
@@ -51,13 +57,7 @@ public class RetrofitManager {
     }
 
     private RetrofitManager() {
-        retrofit = new Retrofit.Builder()
-                .baseUrl(mBaseUrl)
-                .client(getOkHttpClient())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        apiservice = ApiService();
+        this(getOkHttpClient());
     }
 
     private RetrofitManager(OkHttpClient client) {
@@ -67,7 +67,7 @@ public class RetrofitManager {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        apiservice = ApiService();
+        apiService = (NetApi) ApiService(sNetApi);
     }
 
     public static Retrofit getNewRetrofit(OkHttpClient client) {
@@ -79,8 +79,8 @@ public class RetrofitManager {
                 .build();
     }
 
-    private NetApi ApiService() {
-        return retrofit.create(NetApi.class);
+    private NetApi ApiService(Class<NetApi> netApi) {
+        return retrofit.create(netApi);
     }
 
     public static OkHttpClient getOkHttpClient(Interceptor... addInterceptors) {
@@ -93,7 +93,7 @@ public class RetrofitManager {
             public void log(@NonNull String message) {
                 if (!TextUtils.isEmpty(message) && !message.contains("users/token")) {
 //                    FileManager.saveStringToHttpFile("\r\n" + DateUtils.format(System.currentTimeMillis(), Constant.Date.PATTERN_SECOND) + message);
-//                    ESTLog.defaultI("http", message);
+                    Log.i("http", message);
                 }
             }
         });
@@ -129,7 +129,7 @@ public class RetrofitManager {
                 .addInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(@NonNull Chain chain) throws IOException {
-                        Request originalRequest = chain.request();
+//                        Request originalRequest = chain.request();
 //                        String token = SPUtils.getString(Constant.TOKEN, null);
 //                        String userId = SPUtils.getString(Constant.USER_ID, null);
 //                        if (TextUtils.isEmpty(token) || TextUtils.isEmpty(userId)) {
@@ -144,7 +144,10 @@ public class RetrofitManager {
 ////                                .addHeader("Content-Type", "application/json; charset=UTF-8")
 //                                .build();
 ////                        }
-                        return chain.proceed(originalRequest);
+                        Request request = chain.request();
+//                        Request.Builder requestBuilder = request.newBuilder();
+//                        request = requestBuilder.post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded;charset=GBK"), URLDecoder.decode(bodyToString(request.body()), "UTF-8"))).build();
+                        return chain.proceed(request);
                     }
                 })
                 .addInterceptor(interceptor);

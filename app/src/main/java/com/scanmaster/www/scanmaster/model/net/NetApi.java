@@ -1,4 +1,4 @@
-package com.scanmaster.commonlibrary.net;
+package com.scanmaster.www.scanmaster.model.net;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
@@ -16,7 +16,7 @@ import retrofit2.http.Url;
  */
 public interface NetApi {
     /**
-     * 检测更新
+     * 登录
      *
      * @param username        帐号
      * @param password 密码
@@ -24,6 +24,16 @@ public interface NetApi {
     @FormUrlEncoded
     @POST("/login")
     Observable<ResponseBody> login(@Field("username") String username,@Field("password") String password);
+
+    /**
+     * 注册
+     *
+     * @param username        帐号
+     * @param password 密码
+     */
+    @FormUrlEncoded
+    @POST("/register")
+    Observable<ResponseBody> register(@Field("username") String username,@Field("password") String password);
 
     /**
      * 下载文件

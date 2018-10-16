@@ -1,7 +1,5 @@
 package com.scanmaster.commonlibrary.net;
 
-import com.estone.www.estoneapp_new.listener.ProgressListener;
-
 import java.io.IOException;
 
 import okhttp3.MediaType;
